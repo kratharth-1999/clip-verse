@@ -1,9 +1,10 @@
 import { ToastContainer } from "react-toastify";
+import Body from "./components/Body";
 
 function App() {
     return (
         <>
-            <h1 className="text-red-500">Clip Verse</h1>
+            <Body />
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
