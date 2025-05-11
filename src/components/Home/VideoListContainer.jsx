@@ -4,7 +4,7 @@ import VideoRowsContainer from "./VideoRowsContainer";
 
 const VideoListContainer = () => {
     return (
-        <div>
+        <div className="flex-1 flex flex-col items-center">
             <FilterList />
             <VideoRowsContainer />
         </div>

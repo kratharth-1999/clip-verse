@@ -4,7 +4,7 @@ import VideoListContainer from "./VideoListContainer";
 
 const Home = () => {
     return (
-        <div className="flex">
+        <div className="flex px-4 min-h-[calc(100vh_-_81px)]">
             <Sidebar />
             <VideoListContainer />
         </div>
