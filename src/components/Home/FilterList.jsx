@@ -1,7 +1,7 @@
 import React from "react";
 
 const FilterList = () => {
-    return <div>FilterList</div>;
+    return <div></div>;
 };
 
 export default FilterList;

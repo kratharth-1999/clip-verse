@@ -4,7 +4,7 @@ const Logo = () => {
     return (
         <img
             src="/public/clip_verse_logo_mini.png"
-            className="w-20 h-20 cursor-pointer"
+            className="w-20 h-20 cursor-pointer ml-1"
         />
     );
 };
