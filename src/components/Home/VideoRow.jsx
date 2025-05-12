@@ -12,6 +12,7 @@ const VideoRow = ({ type }) => {
                         key={video.id}
                         snippet={video?.snippet}
                         statistics={video?.statistics}
+                        id={video.id}
                     />
                 ))}
             </div>
