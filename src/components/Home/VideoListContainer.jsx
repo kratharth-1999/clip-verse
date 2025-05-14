@@ -2,17 +2,13 @@ import React, { useEffect } from "react";
 import FilterList from "./FilterList";
 import VideoRowsContainer from "./VideoRowsContainer";
 import { useDispatch } from "react-redux";
-import { closeSidebar, openSidebar } from "../../store/slices/appSlice";
+import { openSidebar } from "../../store/slices/appSlice";
 
 const VideoListContainer = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(openSidebar());
-
-        return () => {
-            dispatch(closeSidebar());
-        };
     }, [dispatch]);
 
     return (

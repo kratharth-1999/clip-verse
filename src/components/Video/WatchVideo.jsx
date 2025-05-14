@@ -1,25 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router";
+import CommentsContainer from "./Comments/CommentsContainer";
+import VideoRow from "../Home/VideoRow";
+import usePopularVideos from "../../hooks/usePopularVideos";
+import { useDispatch } from "react-redux";
+import { closeSidebar } from "../../store/slices/appSlice";
 
 const WatchVideo = () => {
     const [searchParams] = useSearchParams();
-    console.log(searchParams.get("v"));
+    usePopularVideos();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(closeSidebar());
+    }, [dispatch]);
+
     return (
-        <div className="flex w-full py-2">
-            <section className="flex flex-col flex-2">
-                <iframe
-                    width="100%"
-                    height="70%"
-                    src={
-                        "https://www.youtube.com/embed/" + searchParams.get("v")
-                    }
-                    title="Youtube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                ></iframe>
+        <div className="flex w-full py-8 px-4 lg:px-8 gap-x-8">
+            <section className="flex flex-col flex-8">
+                <div className="aspect-video rounded-lg overflow-hidden mb-4">
+                    <iframe
+                        className="w-full h-full"
+                        src={
+                            "https://www.youtube.com/embed/" +
+                            searchParams.get("v")
+                        }
+                        title="Youtube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                    ></iframe>
+                </div>
+                <CommentsContainer />
             </section>
-            <section className="flex-1"></section>
+            <aside className="lg:block hidden flex-2">
+                <h2 className="font-semibold text-lg mb-3">Up Next</h2>
+                <VideoRow type="popular" className="!grid-cols-1 gap-y-3" />
+            </aside>
         </div>
     );
 };
