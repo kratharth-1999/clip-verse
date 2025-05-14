@@ -3,3 +3,6 @@ export const YOUTUBE_VIDEO_LIST_BASE_URL =
 
 export const YOUTUBE_POPULAR_VIDEO_LIST =
     YOUTUBE_VIDEO_LIST_BASE_URL + "&chart=mostPopular&maxResults=50&key=";
+
+export const YOUTUBE_SEARCH_API =
+    "https://clients1.google.com/complete/search?client=youtube&gs_ri=youtube&ds=yt&q=";
