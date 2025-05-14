@@ -12,7 +12,7 @@ const SidebarTrigger = () => {
 
     return (
         <IconMenu2
-            className="text-gray-500 cursor-pointer"
+            className="text-indigo-500 cursor-pointer"
             onClick={toggleSidebarHandler}
         />
     );
