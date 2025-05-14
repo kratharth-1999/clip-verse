@@ -8,7 +8,7 @@ const useGet = () => {
     });
 
     const getData = useCallback(
-        async (url, headers = {}, options = {}) => {
+        async (url, headers = {}, options = {}, withoutJSON = false) => {
             setStateOfGetRequest((prevState) => ({
                 ...prevState,
                 data: null,
@@ -23,7 +23,9 @@ const useGet = () => {
                     },
                     ...options,
                 });
-                const response = await responseSync.json();
+                const response = withoutJSON
+                    ? await responseSync.text()
+                    : await responseSync.json();
                 if (!responseSync.ok) {
                     throw new Error(
                         response.status_message ||
