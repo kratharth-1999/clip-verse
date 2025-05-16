@@ -9,7 +9,11 @@ const VideoCard = ({ snippet, statistics, id }) => {
     return (
         <Link to={`/watch?v=${id}`}>
             <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
-                <img src={thumbnails?.medium?.url} alt={title + " thumbnail"} />
+                <img
+                    src={thumbnails?.standard?.url}
+                    alt={title + " thumbnail"}
+                    className="w-full"
+                />
                 <div className="p-3">
                     <h3 className="font-semibold text-sm md:text-base line-clamp-2">
                         {title}
