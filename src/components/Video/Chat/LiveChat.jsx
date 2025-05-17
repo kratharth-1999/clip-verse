@@ -34,7 +34,7 @@ const LiveChat = () => {
     };
 
     return (
-        <div className="border border-gray-300 rounded w-full mb-8 bg-slate-50 px-4 py-2 overflow-y-auto lg:h-[410px] xl:h-[530px] 2xl:h-[850px] flex flex-col-reverse">
+        <div className="border border-gray-300 rounded w-full mb-8 bg-slate-50 px-4 py-2 overflow-y-auto h-[320px] xl:h-[420px] 2xl:h-[620px] flex flex-col-reverse">
             <form
                 className="flex items-center w-full"
                 onSubmit={(e) => addComment(e)}
