@@ -22,9 +22,13 @@ const videosSlice = createSlice({
                 ? action.payload.nextPageToken
                 : "null";
         },
+        reset: (state) => {
+            state.popularVideos = null;
+            state.currentPage = null;
+        },
     },
 });
 
-export const { addPopularVideos } = videosSlice.actions;
+export const { addPopularVideos, reset } = videosSlice.actions;
 
 export default videosSlice.reducer;
