@@ -5,17 +5,25 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { addPopularVideos } from "../store/slices/videosSlice";
 
-const useVideosList = (triggerAPIRequest) => {
+const useVideosList = (triggerAPIRequest, makeAPICallForLastBatch) => {
     const { stateOfGetRequest: videoListRequest, getData } = useGet();
     const dispatch = useDispatch();
     const currentPageToken = useSelector((store) => store.videos.currentPage);
+    const videos = useSelector((store) => store.videos.popularVideos);
 
     useEffect(() => {
-        if (!triggerAPIRequest || currentPageToken === "null") return;
+        if (
+            !triggerAPIRequest ||
+            (currentPageToken === "null" && !makeAPICallForLastBatch)
+        )
+            return;
         let url = `${YOUTUBE_POPULAR_VIDEO_LIST}${
             import.meta.env.VITE_GOOGLE_API_KEY
         }`;
-        if (currentPageToken) url += `&pageToken=${currentPageToken}`;
+        if (currentPageToken && currentPageToken !== "null")
+            url += `&pageToken=${currentPageToken}`;
+        if (currentPageToken === "null" && videos)
+            url += `&pageToken=${Object.keys(videos)[0]}`;
         getData(url);
     }, [getData, triggerAPIRequest]);
 

@@ -7,7 +7,7 @@ import { reset } from "../../store/slices/videosSlice";
 
 const VideoRowsContainer = () => {
     const [triggerAPIRequest, setTriggerAPIRequest] = useState(false);
-    const popularVideosRequest = usePopularVideos(triggerAPIRequest);
+    const popularVideosRequest = usePopularVideos(triggerAPIRequest, false);
     const debounce = useCallback(
         debouncedFunction(setTriggerAPIRequest, 200),
         []

@@ -10,12 +10,13 @@ import LiveChat from "./Chat/LiveChat";
 
 const WatchVideo = () => {
     const [searchParams] = useSearchParams();
-    usePopularVideos(true);
+    usePopularVideos(true, true);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(closeSidebar());
         dispatch(reset());
+        window.scrollTo({ top: 0 });
     }, [dispatch]);
 
     return (
