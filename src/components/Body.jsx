@@ -1,14 +1,18 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Header from "./Header/Header";
-import Home from "./Home/Home";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
-import VideoListContainer from "./Home/VideoListContainer";
-import WatchVideo from "./Video/WatchVideo";
+import ClipVerseFallback from "./Fallback";
+
+const Home = lazy(() => import("./Home/Home"));
+const VideoListContainer = lazy(() => import("./Home/VideoListContainer"));
+const WatchVideo = lazy(() => import("./Video/WatchVideo"));
 
 const Layout = () => (
     <>
         <Header />
-        <Outlet />
+        <Suspense fallback={<ClipVerseFallback />}>
+            <Outlet />
+        </Suspense>
     </>
 );
 
