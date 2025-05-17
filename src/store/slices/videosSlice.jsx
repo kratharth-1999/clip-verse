@@ -9,31 +9,31 @@ const videosSlice = createSlice({
     },
     reducers: {
         addPopularVideos: (state, action) => {
-            if (state.popularVideos) {
-                state.popularVideos[action.payload.nextPageToken] =
-                    action.payload.items;
+            if (action.payload == null) {
+                state.popularVideos = null;
+                state.currentPage = null;
             } else {
-                state.popularVideos = {
-                    [action.payload.nextPageToken
-                        ? action.payload.nextPageToken
-                        : "null"]: action.payload.items,
-                };
+                if (state.popularVideos) {
+                    state.popularVideos[action.payload.nextPageToken] =
+                        action.payload.items;
+                } else {
+                    state.popularVideos = {
+                        [action.payload.nextPageToken
+                            ? action.payload.nextPageToken
+                            : "null"]: action.payload.items,
+                    };
+                }
+                state.currentPage = action.payload.nextPageToken
+                    ? action.payload.nextPageToken
+                    : "null";
             }
-            state.currentPage = action.payload.nextPageToken
-                ? action.payload.nextPageToken
-                : "null";
         },
         addSearchVideos: (state, action) => {
             state.searchedVideos = action.payload;
         },
-        reset: (state) => {
-            state.popularVideos = null;
-            state.currentPage = null;
-            state.searchedVideos = null;
-        },
     },
 });
 
-export const { addPopularVideos, reset, addSearchVideos } = videosSlice.actions;
+export const { addPopularVideos, addSearchVideos } = videosSlice.actions;
 
 export default videosSlice.reducer;

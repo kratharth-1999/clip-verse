@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import VideoCard from "./VideoCard";
 
@@ -14,10 +13,10 @@ const VideoRow = ({ type, className }) => {
                         .flat()
                         ?.map((video) => (
                             <VideoCard
-                                key={video.id}
+                                key={video.id.videoId || video.id}
                                 snippet={video?.snippet}
                                 statistics={video?.statistics}
-                                id={video.id}
+                                id={video.id.videoId || video.id}
                             />
                         ))}
             </div>

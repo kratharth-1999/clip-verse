@@ -3,7 +3,8 @@ import usePopularVideos from "../../hooks/usePopularVideos";
 import VideoRow from "./VideoRow";
 import { debouncedFunction } from "../../utils/methods";
 import { useDispatch } from "react-redux";
-import { reset } from "../../store/slices/videosSlice";
+import { addPopularVideos } from "../../store/slices/videosSlice";
+import { useSelector } from "react-redux";
 
 const VideoRowsContainer = () => {
     const [triggerAPIRequest, setTriggerAPIRequest] = useState(false);
@@ -13,6 +14,9 @@ const VideoRowsContainer = () => {
         []
     );
     const dispatch = useDispatch();
+    const searchedVideos = useSelector(
+        (store) => store.videos["searchedVideos"]
+    );
 
     useEffect(() => {
         const controlDirection = () => {
@@ -24,7 +28,7 @@ const VideoRowsContainer = () => {
             }
         };
         setTriggerAPIRequest(true);
-        dispatch(reset());
+        dispatch(addPopularVideos(null));
         window.addEventListener("scroll", controlDirection);
         return () => {
             window.removeEventListener("scroll", controlDirection);
@@ -38,7 +42,11 @@ const VideoRowsContainer = () => {
 
     return (
         <section className="pl-6 pr-4 py-4">
-            <VideoRow type="popular" />
+            {searchedVideos ? (
+                <VideoRow type="searched" />
+            ) : (
+                <VideoRow type="popular" />
+            )}
         </section>
     );
 };

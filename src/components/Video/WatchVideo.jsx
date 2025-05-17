@@ -5,7 +5,7 @@ import VideoRow from "../Home/VideoRow";
 import usePopularVideos from "../../hooks/usePopularVideos";
 import { useDispatch } from "react-redux";
 import { closeSidebar } from "../../store/slices/appSlice";
-import { reset } from "../../store/slices/videosSlice";
+import { addPopularVideos } from "../../store/slices/videosSlice";
 import LiveChat from "./Chat/LiveChat";
 
 const WatchVideo = () => {
@@ -15,7 +15,7 @@ const WatchVideo = () => {
 
     useEffect(() => {
         dispatch(closeSidebar());
-        dispatch(reset());
+        dispatch(addPopularVideos(null));
         window.scrollTo({ top: 0 });
     }, [dispatch]);
 

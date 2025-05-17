@@ -1,12 +1,15 @@
-import { IconSearch } from "@tabler/icons-react";
+import { IconX, IconSearch } from "@tabler/icons-react";
 import React, { useEffect, useState, useCallback } from "react";
 import useSearchAutoComplete from "../../hooks/useSearchAutocomplete";
 import { debouncedFunction } from "../../utils/methods";
 import { useDispatch, useSelector } from "react-redux";
 import { cacheResults } from "../../store/slices/searchSlice";
+import useSearchVideo from "../../hooks/useSearchVideo";
+import { addSearchVideos } from "../../store/slices/videosSlice";
 
 const Search = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [triggerSearchRequest, setTriggerSearchRequest] = useState(false);
     const { searchAutocompleteRequest, fetchSearchAutoComplete } =
         useSearchAutoComplete();
     const debounce = useCallback(
@@ -19,6 +22,10 @@ const Search = () => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchCache = useSelector((store) => store.search);
     const dispatch = useDispatch();
+    const searchVideoRequest = useSearchVideo(
+        triggerSearchRequest,
+        searchQuery
+    );
 
     useEffect(() => {
         if (!searchQuery || !searchQuery.length) return;
@@ -40,9 +47,23 @@ const Search = () => {
             dispatch(cacheResults({ [searchQuery]: searchSuggestions }));
     }, [searchAutocompleteRequest, dispatch]);
 
+    useEffect(() => {
+        if (!searchVideoRequest.data && !searchVideoRequest.getDataError)
+            return;
+        setTriggerSearchRequest(false);
+    }, [searchVideoRequest]);
+
     return (
         <section>
-            <section className="flex items-center">
+            <form
+                className="flex items-center relative"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    if (searchQuery.length > 0) {
+                        setTriggerSearchRequest(true);
+                    }
+                }}
+            >
                 <input
                     value={searchQuery}
                     type="text"
@@ -52,14 +73,26 @@ const Search = () => {
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => setShowSuggestions(false)}
                 />
-                <button className="bg-indigo-500 px-4 py-2 shadow-sm rounded-full rounded-l-none border border-indigo-500">
+                {searchQuery.length > 0 && (
+                    <IconX
+                        className="text-indigo-500 right-16 cursor-pointer absolute"
+                        onClick={() => {
+                            setSearchQuery("");
+                            dispatch(addSearchVideos(null));
+                        }}
+                    />
+                )}
+                <button className="bg-indigo-500 px-4 py-2 shadow-sm rounded-full rounded-l-none border border-indigo-500 cursor-pointer">
                     <IconSearch className="text-white" />
                 </button>
-            </section>
+            </form>
             {showSuggestions && searchSuggestions.length > 0 && (
                 <section className="absolute bg-white border-gray-100 border border-solid rounded-lg mt-1 ml-1 flex flex-col gap-y-1 w-full md:w-64 lg:w-96">
-                    {searchSuggestions.map((suggestion) => (
-                        <div className="hover:bg-gray-100 cursor-pointer px-4 py-2 flex items-center gap-x-2">
+                    {searchSuggestions.map((suggestion, index) => (
+                        <div
+                            className="hover:bg-gray-100 cursor-pointer px-4 py-2 flex items-center gap-x-2"
+                            key={index}
+                        >
                             <IconSearch className="text-indigo-500" size={16} />
                             {suggestion}
                         </div>

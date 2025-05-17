@@ -19,7 +19,7 @@ const useSearchVideo = (triggerAPIRequest, searchQuery) => {
 
     useEffect(() => {
         if (!searchVideoRequest.data) return;
-        dispatch(addSearchVideos(searchVideoRequest.data));
+        dispatch(addSearchVideos({ items: searchVideoRequest.data.items }));
     }, [searchVideoRequest.data, dispatch]);
 
     useEffect(() => {

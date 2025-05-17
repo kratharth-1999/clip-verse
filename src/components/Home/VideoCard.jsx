@@ -4,13 +4,13 @@ import { Link } from "react-router";
 
 const VideoCard = ({ snippet, statistics, id }) => {
     const { channelTitle, title, thumbnails, publishedAt } = snippet;
-    const { viewCount } = statistics;
+    const { viewCount } = statistics || {};
 
     return (
         <Link to={`/watch?v=${id}`}>
             <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 h-full">
                 <img
-                    src={thumbnails?.standard?.url}
+                    src={thumbnails?.standard?.url || thumbnails?.high?.url}
                     alt={title + " thumbnail"}
                     className="w-full"
                 />
