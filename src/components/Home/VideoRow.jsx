@@ -9,14 +9,17 @@ const VideoRow = ({ type, className }) => {
             <div
                 className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-8 ${className}`}
             >
-                {videoRow?.items?.map((video) => (
-                    <VideoCard
-                        key={video.id}
-                        snippet={video?.snippet}
-                        statistics={video?.statistics}
-                        id={video.id}
-                    />
-                ))}
+                {videoRow &&
+                    Object.values(videoRow)
+                        .flat()
+                        ?.map((video) => (
+                            <VideoCard
+                                key={video.id}
+                                snippet={video?.snippet}
+                                statistics={video?.statistics}
+                                id={video.id}
+                            />
+                        ))}
             </div>
         </section>
     );
