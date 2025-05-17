@@ -17,7 +17,7 @@ const WatchVideo = () => {
 
     return (
         <div className="flex w-full py-8 px-4 lg:px-8 gap-x-8 max-w-[2000px] mx-auto">
-            <section className="flex flex-col flex-8">
+            <section className="flex flex-col flex-7 2xl:flex-8">
                 <div className="aspect-video rounded-lg overflow-hidden mb-4">
                     <iframe
                         className="w-full h-full"
@@ -33,7 +33,7 @@ const WatchVideo = () => {
                 </div>
                 <CommentsContainer />
             </section>
-            <aside className="lg:block hidden flex-2">
+            <aside className="lg:block hidden flex-3 2xl:flex-2">
                 <div>
                     <LiveChat />
                 </div>
