@@ -1,4 +1,4 @@
-# Clip Verse - Discover the World, One Clip at a Time (Check it out in [here])()
+# Clip Verse - Discover the World, One Clip at a Time (Check it out in [here])(https://clip-verse-beta.vercel.app/)
 
 ## 🎬 Dive into a World of Endless Video Exploration 🎬
 
