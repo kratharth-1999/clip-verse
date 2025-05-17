@@ -5,6 +5,7 @@ import VideoRow from "../Home/VideoRow";
 import usePopularVideos from "../../hooks/usePopularVideos";
 import { useDispatch } from "react-redux";
 import { closeSidebar } from "../../store/slices/appSlice";
+import LiveChat from "./Chat/LiveChat";
 
 const WatchVideo = () => {
     const [searchParams] = useSearchParams();
@@ -15,7 +16,7 @@ const WatchVideo = () => {
     }, [dispatch]);
 
     return (
-        <div className="flex w-full py-8 px-4 lg:px-8 gap-x-8">
+        <div className="flex w-full py-8 px-4 lg:px-8 gap-x-8 max-w-[2000px] mx-auto">
             <section className="flex flex-col flex-8">
                 <div className="aspect-video rounded-lg overflow-hidden mb-4">
                     <iframe
@@ -33,6 +34,9 @@ const WatchVideo = () => {
                 <CommentsContainer />
             </section>
             <aside className="lg:block hidden flex-2">
+                <div>
+                    <LiveChat />
+                </div>
                 <h2 className="font-semibold text-lg mb-3">Up Next</h2>
                 <VideoRow type="popular" className="!grid-cols-1 gap-y-3" />
             </aside>
