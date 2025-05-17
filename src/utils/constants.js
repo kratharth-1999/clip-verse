@@ -7,6 +7,9 @@ export const YOUTUBE_POPULAR_VIDEO_LIST =
 export const YOUTUBE_SEARCH_API =
     "https://clients1.google.com/complete/search?client=youtube&gs_ri=youtube&ds=yt&q=";
 
+export const YOUTUBE_SEARCH_RESULTS =
+    "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&type=videos&key=";
+
 export const NAME_LIST = [
     "Time",
     "Past",

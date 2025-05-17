@@ -5,6 +5,7 @@ const videosSlice = createSlice({
     initialState: {
         popularVideos: null,
         currentPage: null,
+        searchedVideos: null,
     },
     reducers: {
         addPopularVideos: (state, action) => {
@@ -22,13 +23,17 @@ const videosSlice = createSlice({
                 ? action.payload.nextPageToken
                 : "null";
         },
+        addSearchVideos: (state, action) => {
+            state.searchedVideos = action.payload;
+        },
         reset: (state) => {
             state.popularVideos = null;
             state.currentPage = null;
+            state.searchedVideos = null;
         },
     },
 });
 
-export const { addPopularVideos, reset } = videosSlice.actions;
+export const { addPopularVideos, reset, addSearchVideos } = videosSlice.actions;
 
 export default videosSlice.reducer;
