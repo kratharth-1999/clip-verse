@@ -14,8 +14,7 @@ const Search = () => {
         []
     );
     const [searchSuggestions, setSearchSuggestions] = useState([
-        "iphone",
-        "iphone pro max",
+        "Cannot provide suggestions since Youtube does not have an autocomplete API anymore. Use the search button to fetch results",
     ]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const searchCache = useSelector((store) => store.search);
@@ -27,7 +26,6 @@ const Search = () => {
             setSearchSuggestions(searchCache[searchQuery]);
             return;
         }
-        debounce(searchQuery);
     }, [searchQuery, debounce]);
 
     useEffect(() => {
